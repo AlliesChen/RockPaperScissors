@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RockPaperScissors</title>
+</head>
+<body>
+    <script>
+        
+        // Output the final result
+        console.log(game());
+        
+        // return the result of each round and report the final winner at the end
+        function game() {
+            let record = 0;
+            for (let i = 0; i < 5; i++) {
+                let computerSelection = computerPlay();
+                let playerSelection = playerPlay();
+                let roundResoult = showResult(playerSelection, computerSelection);
+                console.log(playRound(roundResoult, playerSelection, computerSelection));
+                if (roundResoult == 1) {
+                    record += 1;
+                } else if (roundResoult == 0){
+                    record -= 1;
+                }
+            }
+            let finalResoult = (record > 0) ? "You Win!" : (record < 0) ? "You Lose!" : "Tie!";
+            return finalResoult;
+        }
+
+        // prints the round resoult
+        function playRound (value, playerMake, computerMake) {   
+            if (value == 1) {
+                return `You Win! ${playerMake} beats ${computerMake}`;
+            } else if (value == 2) {
+                return `Tie! You chose ${playerMake} and your opponent chose ${computerMake} as well`;
+            } else {
+                return `You Lose! ${playerMake} cannot beat ${computerMake}`;
+            }
+        }
+        // list the conditions and results base on the players' choices
+        function showResult(player, computer) {
+            if (player == "rock" && computer == "scissors" ||
+                    player == "paper" && computer == "rock" || 
+                    player == "scissors" && computer == "paper") {
+                return 1;
+            } else if (player == computer) {
+                return 2;
+            } else {
+                return 0;
+            }
+        }
+        // get player's choice
+        function playerPlay () {
+            let playerSelection = prompt("Rock, Paper, Scissors!","").toLowerCase
+            ();
+            return playerSelection;
+        }
+        // a founction return rock, paper, scissors randomly by value range
+        function computerPlay () {
+            value = getRandom();
+            if (value < 33) {
+                return "rock";
+            } else if (value <66) {
+                return "paper";
+            } else {
+                return "scissors";
+            }
+        }
+        // get a random value
+        function getRandom () {
+            let value = Math.floor(Math.random() * 100);
+            return value;
+        }
+    </script>
+</body>
+</html>
